@@ -96,7 +96,7 @@ contract StarNotary is ERC721 {
        //transfer back the remaining ETH
         (bool sent1, ) = payable(msg.sender).call{value: tosendBack}("");
       require(sent1, "Failed to send Ether");
-    //  payable(msg.sender).transfer(tosendBack);
+
 
 
 
@@ -131,13 +131,13 @@ contract StarNotary is ERC721 {
     // Implement Task 1 Exchange Stars function
     function exchangeStars(uint256 _tokenId1, uint256 _tokenId2) public {
       //_exists - returns whether the "tokenId" exist
-      // require(_exists(_tokenId1)==true, "_tokenId1 does not exist");
-      // require(_exists(_tokenId2)==true, "_tokenId2 does not exist");
+       require(_exists(_tokenId1)==true, "_tokenId1 does not exist");
+       require(_exists(_tokenId2)==true, "_tokenId2 does not exist");
         //1. Passing to star tokenId you will need to check if the owner of _tokenId1 or _tokenId2 is the sender
         require(msg.sender== ownerOf(_tokenId1) || msg.sender==ownerOf(_tokenId2));
         //2. You don't have to check for the price of the token (star)
         //3. Get the owner of the two tokens (ownerOf(_tokenId1), ownerOf(_tokenId2)
-        //4. Use _transferFrom function to exchange the tokens.
+
         address ownerOfToken1=ownerOf(_tokenId1);
         address ownerOfToken2=ownerOf(_tokenId2);
         //  safeTransferFrom(ownerOfToken1, ownerOfToken2, _tokenId1);
@@ -181,5 +181,4 @@ contract StarNotary is ERC721 {
         safeTransferFrom(msg.sender, _to1, _tokenId);
 
     }
-
 }

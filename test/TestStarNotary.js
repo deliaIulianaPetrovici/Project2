@@ -214,21 +214,4 @@ it('lookUptokenIdToStarInfo test', async() => {
     // 3. Verify if you Star name is the same
     assert.equal(await instance.lookUptokenIdToStarInfo(tokenId, {from:owner}), "Star Test");
 });
-it('cannot look up star if the caller is not the owner of the star',async()=>{
-  let instance=await StarNotary.deployed();
-  // 1. create a Star with different tokenId
-  let tokenId=12;
-  let owner=accounts[1];
-  await instance.createStar('Star Test', tokenId, {from:owner});
-
-  //account that is not the owner
-  let notOwner=accounts[2];
-
-  try {
-    await instance.lookUptokenIdToStarInfo(tokenId, {from:notOwner})
-    assert.fail("The transaction should have thrown an error");
-} catch(err) {
-    assert.include(err.message, "revert", "The error message should contain 'revert'");
-}
-})
 });

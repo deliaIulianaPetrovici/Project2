@@ -47,6 +47,7 @@ const App = {
 
     await lookUptokenIdToStarInfo(tokenId).send({from:this.account});
     let name =await lookUptokenIdToStarInfo(tokenId).call();
+    console.log(name);
     App.setStatus("Name of token is: "+name);
   }
 
